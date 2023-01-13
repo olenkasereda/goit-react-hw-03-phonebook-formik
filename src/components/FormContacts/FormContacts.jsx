@@ -1,5 +1,6 @@
 import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
+import 'yup-phone';
 import { PropTypes } from 'prop-types';
 
 import {
@@ -15,13 +16,7 @@ const schema = yup.object().shape({
     .string()
     .min(2, 'Your name is too short')
     .required('Please enter full name'),
-  number: yup
-    .string()
-    .required('Please enter number')
-    .matches(
-      /(\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9})/,
-      'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
-    ),
+  number: yup.string().required('Please enter number').phone('UA', true),
 });
 
 const initialValues = {
