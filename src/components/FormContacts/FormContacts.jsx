@@ -1,16 +1,23 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
-import s from './FormContact.module.css';
 import { PropTypes } from 'prop-types';
+
+import {
+  ContactForm,
+  ButtonAdd,
+  InputError,
+  FormInput,
+  FormLabel,
+} from './FormContact.styled.js';
 
 const schema = yup.object().shape({
   name: yup
     .string()
     .min(2, 'Your name is too short')
-    .required('Please enter your full name'),
+    .required('Please enter full name'),
   number: yup
     .string()
-    .required('Domain is required.')
+    .required('Please enter number')
     .matches(
       /(\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9})/,
       'Phone number must be digits and can contain spaces, dashes, parentheses and can start with +'
@@ -36,40 +43,24 @@ const FormContacts = props => {
       validationSchema={schema}
       onSubmit={handleSubmit}
     >
-      <Form className={s.form} autoComplete="off">
-        <label className={s.label} htmlFor="login">
+      <ContactForm autoComplete="off">
+        <FormLabel htmlFor="login">
           Name
-          <Field
-            className={s.input}
-            placeholder="Full name"
-            type="text"
-            name="name"
-          />
-          <ErrorMessage
-            className={s.errorMassege}
-            name="name"
-            component="div"
-          />
-        </label>
+          <FormInput placeholder="Full name" type="text" name="name" />
+          <ErrorMessage name="name" component={InputError} />
+        </FormLabel>
         <br />
-        <label className={s.label} htmlFor="password">
+        <FormLabel htmlFor="password">
           Number
-          <Field
-            className={s.input}
+          <FormInput
             placeholder="Phone number: +380..."
             type="tel"
             name="number"
           />
-          <ErrorMessage
-            className={s.errorMassege}
-            name="number"
-            component="div"
-          />
-        </label>
-        <button className={s.Submit} type="submit">
-          Submit
-        </button>
-      </Form>
+          <ErrorMessage name="number" component={InputError} />
+        </FormLabel>
+        <ButtonAdd type="submit">Submit</ButtonAdd>
+      </ContactForm>
     </Formik>
   );
 };

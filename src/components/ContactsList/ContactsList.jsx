@@ -1,11 +1,12 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import s from './ContactsList.module.css';
 import ContactItem from '../ContactItem';
+
+import { ListContacts } from './ContactsList.styled';
 
 const ContactsList = ({ contacts, onDelete }) => {
   return (
-    <ul className={s.list}>
+    <ListContacts>
       {contacts.length
         ? contacts.map(({ name, number, id }) => (
             <ContactItem
@@ -17,7 +18,7 @@ const ContactsList = ({ contacts, onDelete }) => {
             />
           ))
         : 'No contacts'}
-    </ul>
+    </ListContacts>
   );
 };
 

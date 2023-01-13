@@ -1,12 +1,15 @@
-.item {
+import styled from '@emotion/styled';
+
+export const ItemContact = styled.li`
   display: flex;
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 10px;
-}
-.buttonDelete {
+`;
+
+export const ButtonDeleteContact = styled.button`
   max-width: 130px;
   max-height: 45px;
   line-height: 45px;
@@ -24,10 +27,10 @@
   background: white;
   box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
-}
-.buttonDelete:hover {
-  background: #ea450f;
-  box-shadow: 0 15px 20px rgba(165, 188, 179, 0.4);
-  color: white;
-  transform: translateY(-7px);
-}
+  &:hover {
+    background: #ea450f;
+    box-shadow: 0 15px 20px rgba(165, 188, 179, 0.4);
+    color: white;
+    transform: translateY(-7px);
+  }
+`;

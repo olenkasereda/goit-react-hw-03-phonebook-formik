@@ -1,29 +1,10 @@
-// import FormContacts from './FormContacts';
-
-// export const App = () => {
-//   return (
-//     <div
-//       style={{
-//         height: '100vh',
-//         display: 'flex',
-//         justifyContent: 'center',
-//         alignItems: 'center',
-//         fontSize: 40,
-//         color: '#010101',
-//       }}
-//     >
-//       <FormContacts />
-//     </div>
-//   );
-// };
-
 import { Component } from 'react';
 import FormContacts from './FormContacts/FormContacts';
 import Filter from './Filter';
 import ContactsList from './ContactsList';
 import { nanoid } from 'nanoid';
 
-import s from './App.module.css';
+import { Container } from './App.styled';
 
 export class App extends Component {
   state = {
@@ -35,6 +16,21 @@ export class App extends Component {
     ],
     filter: '',
   };
+
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(contacts);
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   addContact = ({ name, number }) => {
     const names = this.state.contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
@@ -70,7 +66,7 @@ export class App extends Component {
 
   render() {
     return (
-      <div className={s.container}>
+      <Container>
         <h1> Phonebook</h1>
         <FormContacts addContact={this.addContact} />
         <Filter value={this.state.filter} onChange={this.onChangeFilter} />
@@ -78,7 +74,7 @@ export class App extends Component {
           contacts={this.getVisibleContacts()}
           onDelete={this.deleteContact}
         />
-      </div>
+      </Container>
     );
   }
 }
