@@ -39,13 +39,13 @@ const FormContacts = props => {
       onSubmit={handleSubmit}
     >
       <ContactForm autoComplete="off">
-        <FormLabel htmlFor="login">
+        <FormLabel>
           Name
           <FormInput placeholder="Full name" type="text" name="name" />
           <ErrorMessage name="name" component={InputError} />
         </FormLabel>
         <br />
-        <FormLabel htmlFor="password">
+        <FormLabel>
           Number
           <FormInput
             placeholder="Phone number: +380..."
